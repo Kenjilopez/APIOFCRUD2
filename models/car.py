@@ -5,7 +5,7 @@ Base = declarative_base()
 
 class Marca(Base):
     __tablename__ = 'marcas'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, index=True)
     name = Column(String(250), nullable=False)
     modelos = relationship('Modelo', back_populates= 'marca',cascade='all, delete-orphan')
     
