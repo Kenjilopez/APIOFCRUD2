@@ -32,7 +32,8 @@ def update_marca_route():
         return jsonify ({'error': 'marca no encontrada'})
     return jsonify(marca), 201
 
-@marca_bp.route('/marcas/<int:marcas_id>', methods=['PUT'])
-def update_marca_route():
+@marca_bp.route('/marcas/<int:marcas_id>', methods=['DELETE'])
+def delete_marca_route(marca_id):
+    success = delete_marca(marca_id)
     if not request.json or 'name' not in request.json or 'modelos' not in request.json:
-        return jsonify({'error': 'Bad request'}), 400
+        return jsonify({'error': 'Bad request'}), 400   
