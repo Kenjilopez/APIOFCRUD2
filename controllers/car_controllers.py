@@ -6,11 +6,11 @@ from services.car_services import (
 marca_bp = Blueprint('marca_bp', __name__)
 
 @marca_bp.route('/marcas', methods=['GET'])
-def get_marcas():
+def get_marcas_list():
     return jsonify(get_all_marca()), 200
 
 @marca_bp.route('/marcas/<int:marcas_id>', methods=['GET'])
-def get_marcas(marcas_id):
+def get_marca_by_id(marcas_id):
     marca = get_car_by_id(marcas_id)
     if marca is None:
         return jsonify({'error': 'Marca no encontrada, mano revise :D'}), 404

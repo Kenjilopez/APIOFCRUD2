@@ -9,4 +9,9 @@ engine = create_engine(
     connect_args={"check_same_thread": False},
     echo=True  # Muestra las consultas SQL en consola
 )
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Crear las tablas al iniciar
+from car import Base
+Base.metadata.create_all(bind=engine)

@@ -13,5 +13,5 @@ class Modelo(Base):
     __tablename__ = 'modelos'
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(255), nullable=False)
-    Marca.id = Column(Integer, ForeignKey('marcas.id'))
+    marca_id = Column(Integer, ForeignKey('marcas.id'))
     marca = relationship('Marca', back_populates='modelos')
