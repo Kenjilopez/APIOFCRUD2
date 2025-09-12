@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-# Base de datos en memoria (los datos se pierden al cerrar la aplicación)
-DATABASE_URL = "sqlite:///:memory:"
+# Base de datos persistente en archivo local
+DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(
     DATABASE_URL, 

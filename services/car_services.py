@@ -4,13 +4,13 @@ from sqlalchemy.orm import joinedload
 
 def get_all_marca():
     session = SessionLocal()
-    marcas = session.query(marca).options(joinedload(marca.model)).all()
+    marcas = session.query(Marca).options(joinedload(Marca.modelos)).all()
     result = []
     for marca in marcas:
         result.append({
             'id': marca.id,
             'name': marca.name,
-            'modelo': [{'id': modelo.id, 'title': modelo.title} for modelo in marca.modelos]
+            'modelos': [{'id': modelo.id, 'title': modelo.title} for modelo in marca.modelos]
         })
     session.close()
     return result
@@ -22,7 +22,7 @@ def get_car_by_id(marca_id):
         result = {
             'id': marca.id,
             'name': marca.name,
-            'modelo':[{'id': modelo.id, 'title': modelo.title} for modelo in marca.modelos]
+            'modelos': [{'id': modelo.id, 'title': modelo.title} for modelo in marca.modelos]
         }
     else:
         result = None
@@ -34,15 +34,16 @@ def create_marca(data):
     marca = Marca(name=data['name'])
     session.add(marca)
     session.commit()
-
+    modelos_objs = []
     for modelo_title in data.get('modelos', []):
         modelo = Modelo(title=modelo_title, marca_id=marca.id)
         session.add(modelo)
+        modelos_objs.append(modelo)
     session.commit()
     result = {
         'id': marca.id,
         'name': marca.name,
-        'modelos': [modelo.title for modelo in marca.modelos]
+        'modelos': [{'id': modelo.id, 'title': modelo.title} for modelo in modelos_objs]
     }
     session.close()
     return result
