@@ -13,5 +13,5 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Crear las tablas al iniciar
-from car import Base
+from models.car import Base
 Base.metadata.create_all(bind=engine)

@@ -1,5 +1,5 @@
 from config.database import SessionLocal
-from car import Marca,Modelo
+from models.car import Marca, Modelo
 from sqlalchemy.orm import joinedload
 
 def get_all_marca():
